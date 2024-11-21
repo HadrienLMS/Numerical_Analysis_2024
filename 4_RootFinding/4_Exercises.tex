@@ -1,0 +1,120 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage[scale=0.8]{geometry}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{color}
+
+\title{Nonlinear (systems of) equations \\[1ex] \large Numerical analysis - University of Luxembourg}
+\author{Exercises}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{Introduction}
+
+\noindent \textbf{Exercise 1.} \textit{} \\
+
+Consider the system of non-linear equations in two dimensions
+
+\begin{align*}
+    x_1^2 - x_2 + \gamma = 0 \\
+    -x_1 + x_2^2 + \gamma = 0
+\end{align*}
+
+Give a geometrical interpretation to the solutions of this non-linear system, by plotting the iso-contours of the two functions for different values of $\gamma$.
+\begin{itemize}
+\item define a grid $[-2,2] \times [2,2]$ using np.meshgrid
+\item plot the isolines using plt.contour (you can also experiment plt.contourf - filled contours) 
+\item note that you can specify the zero-valued isoline with "levels = [0]"
+\item How many solutions do you visually find for $\gamma=0.5$, $\gamma=0.25$, $\gamma=-0.5$ and $\gamma=-1$ respectively?
+\item finally, experiment 3D rendering
+\end{itemize}
+
+\section*{1D Root-finding}
+
+\noindent \textbf{Exercise 2.} \textit{Bisection method} \\
+Implement the bisection method and test you methods on the following functions
+\begin{itemize}
+    \item $x^2 = 4\sin(x) $
+    \item $x^3 -2x -5 = 0$
+    \item $x \sin(x) = 1$
+    \item $e^{-x} = x$
+    \item $ x^3 - 3x^2 + 3x -1 = 0$
+\end{itemize}
+What termination criterion should you use? What convergence rate is achieved? Compare your result (solution and convergence rate) with those for a library routine for solving nonlinear equations (scipy.optimize).
+
+
+\vspace{0.5cm}
+\noindent \textbf{Exercise 3.} \textit{Fixed point method} \\
+For the equation 
+$$ f(x) = x^2 -x - 2 =0 $$
+Each of the following functions yields an equivalent fixed-point problem
+\begin{align}
+&g_1(x)=\left(x^2-2\right) \\
+&g_2(x)=\sqrt{x + 2} \\
+&g_3(x)= 1 + 2 / x \\
+&g_4(x)=\left(x^2+2\right) /(2x-1) .
+\end{align}
+Analyze the convergence properties of each
+of the corresponding fixed-point iteration schemes
+for the root $x = 2$ by considering $|g'_i(2)|$. \\
+Confirm your analysis by implementing each
+of the schemes and verifying its convergence (or
+lack thereof) and approximate convergence rate
+
+\vspace{0.5cm}
+\noindent \textbf{Exercise 4.} \textit{Secant and Newton's method} \\
+Consider again exercise 2, but now solve it using Secant and Newton's method. 
+
+
+\vspace{0.5cm}
+\noindent \textbf{Exercise 5.} \textit{Newton fractal} \\
+Consider the polynomial function $$ f: x \mapsto x^3 - 1 $$ \\ What are the roots of this polynomial ? \\ Report on a 1D plot the behaviour of Newton's method for many different starting points (convergence towards a root or divergence - use a different color for each behaviour and each root). Do the same exercise but for many starting points in the \textit{complex plane}. Plot the so-called basin of attraction of the system, that is report for many different starting points the behaviour of the method. Use a different color for each root.
+\vspace{0.2cm} \\
+Replot the basin of attraction with the secant method. For the Newton or secant method you should obtain a fractal pattern. Try to explain and interpret what you observe.
+
+\section*{Root-finding in higher dimensions}
+\noindent \textbf{Exercise 6.} \textit{2D zero finding} \\
+Find the zeros of the following systems
+\begin{align*}
+    xy + y^2 &= 1 \\
+    xy^3 + x^2y^2 &= -1
+\end{align*}
+and 
+\begin{align*}
+    x^2 &= y - x \cos(\pi x) \\
+    yx &= 1/x -  e^{-y}
+\end{align*}
+using Newton's method in 2D. You will need to compute the Jacobian matrix.
+
+\vspace{0.5cm}
+\noindent \textbf{Exercise 7.} \textit{3D zero finding} \\
+Let $F$ be defined by
+$$
+F: \quad\left(\begin{array}{l}
+x \\
+y \\
+z
+\end{array}\right) \longmapsto\left(\begin{array}{l}
+x y^2+2 y^2 z+10 y^2+x+2 z+10 \\
+x z^2-2 y z^2-10 z^2+2 x-4 y-20 \\
+5 y^3+4 z^3+4 y^2 z+5 y z^2-5 y^2-5 z^2
+\end{array}\right)
+$$
+The goal of this exercise is to find a zero of $F$ by using three methods.
+\begin{itemize}
+    \item Let $\phi$ such that
+$$
+\phi(x, y, z)=f_1(x, y, z)^2+f_2(x, y, z)^2+f_3(x, y, z)^2
+$$
+where $f_1, f_2, f_3$ are the functions that define the components of $F$. By using \texttt{scipy.optimize.minimize}, find a minimum of $\phi$. Is it a zero of $F$ ? What happens if you change the initial value ?
+\item Code the Newton method for $F$.
+\item Code the Broyden method for $F$.
+\item Run the two methods, interpret your results and conclude
+\end{itemize}
+\end{document}
