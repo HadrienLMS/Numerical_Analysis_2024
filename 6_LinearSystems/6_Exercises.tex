@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage[scale=0.8]{geometry}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{color}
+
+\title{Linear systems \\[1ex] \large Numerical analysis - University of Luxembourg}
+\author{Exercises}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Direct solvers}
+\noindent \textbf{Exercise 1.} \textit{Triangular linear systems} \\
+Implement two routines that perform respectively forward and backward substitution.
+Test your function on two small triangular matrices of your choice.
+
+\vspace{0.5cm}
+\noindent \textbf{Exercise 2.} \textit{LU decomposition} \\
+Use \texttt{scipy.linalg.lu} to compute the L and U factors, and then use your functions from Exercise 1 to solve the linear system thanks to forward and backward substitution
+Test your code with the matrix
+$$ A=\begin{pmatrix}
+6 & 3 & 4 & 8 \\
+3 & 6 & 5 & 1 \\
+4 & 5 & 10 & 7 \\
+8 & 1 & 7 & 25 \\
+\end{pmatrix} $$
+and right hand side 
+$$ b=\begin{pmatrix}
+32 \\
+23 \\
+33 \\
+31 \\
+\end{pmatrix} $$
+Do it again but implement your own LU decomposition (without pivoting) thanks to the pseudo-code seen in class.
+
+\vspace{0.5cm}
+\noindent \textbf{Exercise 3.} \textit{Pivoting strategy} \\
+Run your linear system solver from Ex. 2 to solve the linear system $Ax=b$, with 
+$$ A=\begin{pmatrix}
+10^{-15} & 1  \\
+1 & 1 \\
+\end{pmatrix}, \quad b = \begin{pmatrix}
+1 \\ 2
+\end{pmatrix} $$
+Implement a pivoting strategy to handle the issue.
+
+
+\vspace{0.5cm}
+\noindent \textbf{Exercise 4.} \textit{QR factorization} \\
+The QR factorization or QR decomposition allows to split the matrix $A$ of size $m \times n$ as a product of unitary $m \times m$ matrix $Q$ with an upper triangular $m \times n$ matrix $R$, such as
+$$ A = QR, \quad QQ^T = I, \quad R = \begin{pmatrix} \hat{R} \\ 0 \end{pmatrix}, $$
+where $\hat{R}$ is of size $n \times n$.
+\begin{enumerate}
+    \item Thanks to a backward substitution, write how to solve a square linear system $Ax=b$ in that case.
+\end{enumerate}
+We will now implement the decomposition thanks to the following steps
+\begin{enumerate}
+    \item From the columns $A = [\textbf{a}_1 \cdots \textbf{a}_n]$ of the matrix $A$, write down the Gram-Schmidt procedure and create the orthogonal basis 
+    $$
+    \textbf{u}_k = \textbf{a}_k - \sum_{j=1}^{k-1} \text{proj}_{\textbf{u}_j} \textbf{a}_k.
+    $$
+    \item The matrix $Q$ is given by $Q = [\textbf{e}_1 \cdots \textbf{e}_n]$, where $\textbf{e}_k = \frac{\textbf{u}_k}{\left\| \textbf{u}_k \right\|}$. 
+    \item From $Q$, find how to easily get the matrix $R$
+\end{enumerate}
+Finally, recall what are the normal equations (least square problem), and explain how to solve it thanks to $QR$ decomposition. Would your use a $QR$ decomposition rather than a $LU$ decomposition in this case ? Justify your answer \\
+As an application, solve a least square problem and verify your implementation with the built-in \texttt{scipy.linalg.qr}.
+
+\section*{Iterative solvers}
+\noindent \textbf{Exercise 5.} \textit{A small test} \\
+Consider the linear system
+\begin{align*}
+    7 x_1 + 3 x_2 + x_3 &= 3 \\
+    -3 x_1 + 10x_2 + 2 x_3 &= 4 \\
+    x_1 + 7x_2 -15x_3 &= 2
+\end{align*}
+Questions: 
+\begin{enumerate}
+    \item write down the $k$-th Jacobi iteration in its pointwise and matrix form. Specify the matrix splitting of the method. Implement the Jacobi solver and test it, 
+    \item do the same exercise for the Gauss-Seidel method.
+Comment and explain your results. Which method is fastest and why ?
+ \item Implement relaxation techniques and experiment with it. 
+\end{enumerate}
+
+\end{document}
