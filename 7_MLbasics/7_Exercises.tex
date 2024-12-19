@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage[scale=0.8]{geometry}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{color}
+
+\title{Introduction to Machine Learning \\[1ex] \large Numerical analysis - University of Luxembourg}
+\author{Exercises}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{Linear regression}
+
+\noindent \textbf{Exercise 1.} \textit{Linear Regression for Housing Prices} \\
+
+In this exercise, you will build a simple machine-learning model to predict house prices based on given features. Here is a small dataset for training and testing your model:
+
+\[
+\begin{array}{|c|c|c|c|c|c|c|c|}
+\hline
+\text{Size (m²)} & \text{Bedrooms} & \text{Bathrooms} & \text{Garage Size} & \parbox[c]{2cm}{\centering Age \\ (Years)} & 
+\parbox[c]{2cm}{\centering Distance to\\ Center (km)} & \parbox[c]{2cm}{\centering Renovation\\ status} & \parbox[c]{2cm}{\centering Price\\ (\$1000s)} \\
+\hline
+50  & 1 & 1 & 0 & 30 & 10 & 0 & 398.5  \\
+60  & 2 & 1 & 1 & 20 & 8  & 1 & 468.5  \\
+70  & 2 & 2 & 1 & 50 & 15 & 0 & 474.0  \\
+80  & 2 & 2 & 2 & 10 & 5  & 2 & 593.0  \\
+90  & 3 & 2 & 1 & 25 & 7  & 1 & 621.5  \\
+100 & 3 & 3 & 2 & 40 & 12 & 0 & 647.3  \\
+110 & 3 & 2 & 2 & 5  & 4  & 2 & 751.3  \\
+120 & 4 & 3 & 2 & 15 & 6  & 1 & 798.0  \\
+130 & 4 & 3 & 2 & 45 & 13 & 0 & 791.9  \\
+140 & 4 & 3 & 3 & 8  & 3  & 2 & 911.0  \\
+\hline
+\end{array}
+\]
+%
+\textbf{Legend for Garage size:} \\
+\texttt{0 = no garage, 1 = 1 car, 2 = more} \\
+%
+\textbf{Legend for Renovation Status:} \\
+\texttt{0 = Old, 1 = Medium, 2 = New}
+\\
+
+\begin{itemize}
+
+\item{\textbf{Load the data}: define the dataset as a Python dictionary and convert it to a Pandas DataFrame.}
+
+\item{\textbf{Preprocess the data}: normalize the features to bring them to a similar scale.}
+
+\item{\textbf{Split the data}: divide the dataset into training and testing sets (80\% train, 20\% test).}
+
+\item{\textbf{Train a model}: use Linear Regression from scikit-learn to predict house prices based on the features.}
+
+\item{\textbf{Evaluate the model}: calculate the Mean Squared Error (MSE) on the test set.}
+
+\end{itemize}
+
+\section*{Non Linear regression}
+\noindent \textbf{Exercise 2.} \textit{Non-Linear Regression for Housing Prices} \\
+
+In this exercise, you will predict housing prices using non-linear regression on the California Housing dataset available in scikit-learn.
+
+Steps to follow:
+
+\begin{enumerate}
+\item Load the dataset using "data = fetch\_california\_housing()" and inspect it
+\item Train and evaluate two models:
+\begin{itemize}
+\item Polynomial Regression: A simple non-linear extension of linear regression.
+\item Decision Tree Regression: A flexible tree-based model.
+\end{itemize}
+\item Compare both models using Mean Squared Error (MSE).
+\end{enumerate}
+
+
+
+\end{document}
